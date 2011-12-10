@@ -1,0 +1,34 @@
+{
+  "name": "stackshuffle",
+  "version": "1.0",
+  "title": "jQuery.stackShuffle",
+  "author": {
+    "name": "Marcus Campbell",
+    "url": "https://github.com/scronide"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    },
+    {
+      "type": "GPLv2",
+      "url": "http://www.gnu.org/licenses/old-licenses/gpl-2.0.html"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.2.3"
+  },
+  "description": "Stack a pile of images and shuffle through them as a slideshow.",
+  "keywords": [
+    "animation",
+    "slideshow",
+    "images",
+    "media",
+  ],
+  "homepage": "https://github.com/scronide/jquery.stackShuffle",
+  "files": [
+    "jquery.stackShuffle.js",
+    "README.md"
+  ]
+}
