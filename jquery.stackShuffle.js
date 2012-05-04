@@ -75,14 +75,20 @@
         $(target).css('-webkit-transform', css_value);
         $(target).css('transform', css_value);
 
-        rad = deg * Math.PI * 2 / 360;
-        costheta = Math.cos(rad);
-        sintheta = Math.sin(rad);
-        m11 = parseFloat(costheta).toFixed(8);
-        m12 = parseFloat(-sintheta).toFixed(8);
-        m21 = parseFloat(sintheta).toFixed(8);
-        m22 = parseFloat(costheta).toFixed(8);
-        $(target).css('filter', 'progid:DXImageTransform.Microsoft.Matrix(M11='+ m11 +', M12='+ m12 +', M21='+ m21 +', M22='+ m22 +', sizingMethod="auto expand"');
+        /**
+         * Internet Explorer >= 9 is capable to render css transformations and doesn't need the filter property 
+         */
+        if ( $.browser.msie && parseInt($.browser.version, 10) < 9 ) {
+          rad = deg * Math.PI * 2 / 360;
+          costheta = Math.cos(rad);
+          sintheta = Math.sin(rad);
+          m11 = parseFloat(costheta).toFixed(8);
+          m12 = parseFloat(-sintheta).toFixed(8);
+          m21 = parseFloat(sintheta).toFixed(8);
+          m22 = parseFloat(costheta).toFixed(8);
+          
+          $(target).css('filter', 'progid:DXImageTransform.Microsoft.Matrix(M11='+ m11 +', M12='+ m12 +', M21='+ m21 +', M22='+ m22 +', sizingMethod="auto expand"');
+        }
       }
 
       function _shuffle(target) {
