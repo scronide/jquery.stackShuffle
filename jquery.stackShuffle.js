@@ -1,5 +1,5 @@
 /**
- * jQuery stackShuffle 1.0
+ * jQuery stackShuffle 1.1
  * Copyright (c) 2011 Marcus Campbell
  *
  * Dual-licensed under the MIT and GPL Version 2 licenses:
@@ -69,20 +69,30 @@
       function _rotate(target) {
         var deg = Math.floor(Math.random() * (settings.rotation * 2 + 1)) - settings.rotation;
 
-        var css_value = 'rotate(' + deg + 'deg)';
-        $(target).css('-ms-transform', css_value);
-        $(target).css('-moz-transform', css_value);
-        $(target).css('-webkit-transform', css_value);
-        $(target).css('transform', css_value);
-
-        rad = deg * Math.PI * 2 / 360;
-        costheta = Math.cos(rad);
-        sintheta = Math.sin(rad);
-        m11 = parseFloat(costheta).toFixed(8);
-        m12 = parseFloat(-sintheta).toFixed(8);
-        m21 = parseFloat(sintheta).toFixed(8);
-        m22 = parseFloat(costheta).toFixed(8);
-        $(target).css('filter', 'progid:DXImageTransform.Microsoft.Matrix(M11='+ m11 +', M12='+ m12 +', M21='+ m21 +', M22='+ m22 +', sizingMethod="auto expand"');
+        var supported = false;
+        var vendors   = ['', 'Webkit', 'Moz', 'ms', 'O'];
+        detectSupport:
+          for (var i = 0; i < 5; i++) {
+            if (typeof document.body.style[vendors[i] + 'Transform'] != 'undefined') {
+              supported  = true;
+              var prefix = '';
+              if (vendors[i].length) {
+                prefix = '-' + vendors[i].toLowerCase() + '-';
+              }
+              $(target).css(prefix + 'transform', 'rotate(' + deg + 'deg)');
+              break detectSupport;
+            }
+          }
+        if (!supported) {
+          rad = deg * Math.PI * 2 / 360;
+          costheta = Math.cos(rad);
+          sintheta = Math.sin(rad);
+          m11 = parseFloat(costheta).toFixed(8);
+          m12 = parseFloat(-sintheta).toFixed(8);
+          m21 = parseFloat(sintheta).toFixed(8);
+          m22 = parseFloat(costheta).toFixed(8);
+          $(target).css('filter', 'progid:DXImageTransform.Microsoft.Matrix(M11=' + m11 + ', M12=' + m12 + ', M21=' + m21 + ', M22=' + m22 + ', sizingMethod="auto expand"');
+        }
       }
 
       function _shuffle(target) {
