@@ -1,5 +1,5 @@
 /**
- * jQuery stackShuffle 1.1
+ * jQuery stackShuffle 1.1.0
  * Copyright (c) 2011 Marcus Campbell
  *
  * Dual-licensed under the MIT and GPL Version 2 licenses:
